@@ -1,4 +1,4 @@
-package com.study.schedule.model
+package br.com.study.schedule.model
 
 import java.io.Serializable
 

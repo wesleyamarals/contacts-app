@@ -1,15 +1,13 @@
-package com.study.schedule.ui.activity
+package br.com.study.schedule.activity
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.study.schedule.R
-import com.study.schedule.dao.StudentDao
-import com.study.schedule.model.Student
+import br.com.study.schedule.dao.StudentDao
+import br.com.study.schedule.model.Student
 
 
 

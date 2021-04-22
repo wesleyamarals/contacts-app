@@ -11,9 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Schedule">
         <activity
-            android:name=".ui.activity.StudentRegisterActivity">
+            android:name="br.com.study.schedule.activity.StudentRegisterActivity">
         </activity>
-        <activity android:name=".ui.activity.StudentListActivity">
+        <activity android:name="br.com.study.schedule.activity.StudentListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
