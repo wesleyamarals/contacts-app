@@ -1,6 +1,6 @@
-package com.study.schedule.dao
+package br.com.study.schedule.dao
 
-import com.study.schedule.model.Student
+import br.com.study.schedule.model.Student
 
 val students : MutableList<Student> = mutableListOf()
 var idIncrement = 1

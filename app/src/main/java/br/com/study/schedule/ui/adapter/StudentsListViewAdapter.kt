@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.study.schedule.R
-import com.study.schedule.model.Student
+import br.com.study.schedule.model.Student
 
 class StudentsListViewAdapter(private val context: Context) : BaseAdapter() {
 

@@ -1,4 +1,4 @@
-package com.study.schedule.ui.activity
+package br.com.study.schedule.activity
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -6,18 +6,15 @@ import android.os.Bundle
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.BaseAdapter
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import br.com.study.schedule.ui.adapter.StudentsListViewAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.study.schedule.R
-import com.study.schedule.dao.StudentDao
-import com.study.schedule.model.Student
+import br.com.study.schedule.dao.StudentDao
+import br.com.study.schedule.model.Student
 
 const val APP_BAR_TITLE_STUDENTS_LIST = "Lista de Alunos"
 
