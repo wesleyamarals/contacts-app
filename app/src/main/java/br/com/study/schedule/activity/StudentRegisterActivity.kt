@@ -5,8 +5,11 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
+import br.com.study.schedule.dao.RoomStudentDao
 import com.study.schedule.R
 import br.com.study.schedule.dao.StudentDao
+import br.com.study.schedule.database.ScheduleDatabase
 import br.com.study.schedule.model.Student
 
 
@@ -16,7 +19,7 @@ const val APP_BAR_TITLE_EDIT_STUDENT = "Edite o aluno"
 
 class StudentRegisterActivity : AppCompatActivity() {
 
-   private val studentDao = StudentDao()
+    private lateinit var studentDao : RoomStudentDao
     private lateinit var student : Student
     private var nameText : EditText? = null
     private var phoneText : EditText? = null
@@ -26,6 +29,7 @@ class StudentRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_student_register)
 
+        studentDao = ScheduleDatabase.getInstance(this)
         getTextData()
 
         fillTextValues()

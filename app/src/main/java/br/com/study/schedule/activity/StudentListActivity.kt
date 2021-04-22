@@ -10,17 +10,20 @@ import android.widget.AdapterView
 import android.widget.ListView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
+import br.com.study.schedule.dao.RoomStudentDao
 import br.com.study.schedule.ui.adapter.StudentsListViewAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.study.schedule.R
 import br.com.study.schedule.dao.StudentDao
+import br.com.study.schedule.database.ScheduleDatabase
 import br.com.study.schedule.model.Student
 
 const val APP_BAR_TITLE_STUDENTS_LIST = "Lista de Alunos"
 
 class StudentListActivity : AppCompatActivity() {
 
-    private val studentsDao = StudentDao()
+    private lateinit var studentsDao : RoomStudentDao
     private lateinit var adapter : StudentsListViewAdapter
 
 
@@ -30,9 +33,36 @@ class StudentListActivity : AppCompatActivity() {
 
         this.title = APP_BAR_TITLE_STUDENTS_LIST
 
-        configureButtonAddStudent()
+        studentsDao = ScheduleDatabase.getInstance(this)
+
         configureListView()
+        configureButtonAddStudent()
     }
+
+    private fun configureListView() {
+
+        val studentsList: ListView = findViewById(R.id.student_list_activity_students_list)
+
+        configureAdapter(studentsList)
+        configureOnItemClick(studentsList)
+        registerForContextMenu(studentsList)
+    }
+
+    private fun configureAdapter(studentsList: ListView) {
+        adapter = StudentsListViewAdapter(this)
+        studentsList.adapter = adapter
+    }
+
+    private fun configureOnItemClick(studentsList: ListView) {
+        studentsList.setOnItemClickListener { adapterView: AdapterView<*>, _, position: Int, _ ->
+
+            val selectedStudent : Student = adapterView.getItemAtPosition(position) as Student
+
+            startActivity(Intent(this, StudentRegisterActivity::class.java).putExtra("student", selectedStudent))
+
+        }
+    }
+
 
     override fun onCreateContextMenu(menu: ContextMenu?, v: View?, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
@@ -69,34 +99,10 @@ class StudentListActivity : AppCompatActivity() {
         }.setNegativeButton("Não", null).show()
     }
 
-    private fun configureListView() {
-
-        val studentsList: ListView = findViewById(R.id.student_list_activity_students_list)
-
-        configureAdapter(studentsList)
-        configureOnItemClick(studentsList)
-        registerForContextMenu(studentsList)
-    }
 
     private fun removeStudent(selectedStudent: Student) {
         studentsDao.remove(selectedStudent)
         adapter.remove(selectedStudent)
-    }
-
-    private fun configureAdapter(studentsList: ListView) {
-        adapter = StudentsListViewAdapter(this)
-        studentsList.adapter = adapter
-
-    }
-
-    private fun configureOnItemClick(studentsList: ListView) {
-        studentsList.setOnItemClickListener { adapterView: AdapterView<*>, _, position: Int, _ ->
-
-            val selectedStudent : Student = adapterView.getItemAtPosition(position) as Student
-
-            startActivity(Intent(this, StudentRegisterActivity::class.java).putExtra("student", selectedStudent))
-
-        }
     }
 
     private fun configureButtonAddStudent() {
